@@ -1,0 +1,66 @@
+body {
+    background: #eef2f7;
+}
+
+.task-card {
+    transition: .25s;
+    border: none;
+}
+
+.task-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,.15) !important;
+}
+
+.card {
+    border-radius: 15px;
+}
+
+.card-header {
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.badge {
+    font-size: .9rem;
+    padding: 8px 12px;
+}
+
+.btn {
+    border-radius: 10px;
+}
+
+.form-control,
+.form-select {
+    border-radius: 10px;
+}
+
+textarea {
+    resize: none;
+}
+
+.dashboard-card{
+    transition:0.3s;
+}
+
+.dashboard-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 1rem 2rem rgba(0,0,0,.15)!important;
+}
+
+.dashboard-card h2 {
+    color: #000;
+}
+
+.dashboard-card h6{
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.quick-filter .btn{
+    min-width:120px;
+    font-weight:600;
+}
+
+.quick-filter{
+    margin-bottom:25px;
+}
