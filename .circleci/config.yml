@@ -11,12 +11,21 @@ jobs:
     steps:
       - checkout
 
+      - restore_cache:
+          keys:
+            - backend-v1-{{ checksum "backend/requirements.txt" }}
+
       - run:
           name: Install Backend Dependencies
           command: |
             cd backend
             python -m pip install --upgrade pip
             pip install -r requirements.txt
+
+      - save_cache:
+          key: backend-v1-{{ checksum "backend/requirements.txt" }}
+          paths:
+            - ~/.cache/pip
 
       - run:
           name: Django System Check
@@ -39,14 +48,20 @@ jobs:
     steps:
       - checkout
 
+      - restore_cache:
+          keys:
+            - frontend-v1-{{ checksum "frontend/package-lock.json" }}
+
       - run:
           name: Install Frontend Dependencies
           command: |
             cd frontend
-            rm -rf node_modules
-            rm -f package-lock.json
-            npm install
-            npm install @rollup/rollup-linux-x64-gnu --save-dev
+            npm ci
+
+      - save_cache:
+          key: frontend-v1-{{ checksum "frontend/package-lock.json" }}
+          paths:
+            - frontend/node_modules
 
       - run:
           name: Build React Application
