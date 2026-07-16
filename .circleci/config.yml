@@ -36,9 +36,13 @@ jobs:
       - run:
           name: Install Node.js
           command: |
-            curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
-            apt-get update
-            apt-get install -y nodejs
+            export NVM_DIR="$HOME/.nvm"
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+            . "$NVM_DIR/nvm.sh"
+            nvm install 22
+            nvm use 22
+            node --version
+            npm --version
 
       # -------------------------
       # Frontend
@@ -46,12 +50,16 @@ jobs:
       - run:
           name: Install Frontend Dependencies
           command: |
+            export NVM_DIR="$HOME/.nvm"
+            . "$NVM_DIR/nvm.sh"
             cd frontend
             npm install
 
       - run:
           name: Build React Application
           command: |
+            export NVM_DIR="$HOME/.nvm"
+            . "$NVM_DIR/nvm.sh"
             cd frontend
             npm run build
 
