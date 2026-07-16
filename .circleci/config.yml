@@ -32,7 +32,7 @@ jobs:
 
   frontend:
     docker:
-      - image: cimg/node:22.11
+      - image: cimg/node:20.18
 
     working_directory: ~/project
 
@@ -43,7 +43,8 @@ jobs:
           name: Install Frontend Dependencies
           command: |
             cd frontend
-            npm install
+            rm -rf node_modules
+            npm ci
 
       - run:
           name: Build React Application
