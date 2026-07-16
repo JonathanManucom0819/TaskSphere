@@ -69,6 +69,27 @@ jobs:
             cd frontend
             npm run build
 
+    docker-build:
+    docker:
+      - image: cimg/base:stable
+
+    working_directory: ~/project
+
+    steps:
+      - checkout
+
+      - setup_remote_docker
+
+      - run:
+          name: Build Backend Docker Image
+          command: |
+            docker build -t tasksphere-backend ./backend
+
+      - run:
+          name: Build Frontend Docker Image
+          command: |
+            docker build -t tasksphere-frontend ./frontend
+
 workflows:
   version: 2
 
@@ -76,3 +97,7 @@ workflows:
     jobs:
       - backend
       - frontend
+      - docker-build:
+          requires:
+            - backend
+            - frontend
